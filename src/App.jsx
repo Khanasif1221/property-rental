@@ -11,8 +11,6 @@ import PrivacyPolicy from './components/PrivacyPolicy'
 import TermsConditions from './components/TermsConditions'
 
 
-
-
 const App = () => {
   return (
     <div className='w-full overflow-hidden'>
