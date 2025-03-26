@@ -6,7 +6,7 @@ import star_icon from './star_icon.svg'
 import left_arrow from './left_arrow.svg'
 import right_arrow from './right_arrow.svg'
 import header_img from './header_img.png'
-import brand_img from './brand_img.png'
+import brand_img from './brand_img.jpg'
 import project_img_1 from './project_img_1.jpg'
 import project_img_2 from './project_img_2.jpg'
 import project_img_3 from './project_img_3.jpg'
@@ -36,39 +36,45 @@ export const assets = {
 
 export const projectsData = [
     {
-      title: "Skyline Haven",
-      price: "$2,50,000",
-      location: "California",
+      title: "The Maharaja Studio",
+      type: "studio",
+      price: "Rs1,50,000",
+      location: "New Delhi",
       image: project_img_1
     },
     {
-      title: "Vista Verde",
-      price: "$2,50,000",
-      location: "San Francisco",
+      title: "Luxury Villa",
+      type: "villa",
+      price: "Rs2,50,000",
+      location: "Bengaluru",
       image: project_img_2
     },
     {
-      title: "Serenity Suites",
-      price: "$2,50,000",
-      location: "Chicago",
+      title: "Suburban House",
+      type: "house",
+      price: "Rs2,25,000",
+      location: "Mumbai",
       image: project_img_3
     },
     {
-      title: "Central Square",
-      price: "$2,50,000",
-      location: "Los Angeles",
+      title: "Cozy Cottage",
+      type: "cottage",
+      price: "Rs2,00,000",
+      location: "Hydrabad",
       image: project_img_4
     },
     {
-      title: "Vista Verde",
-      price: "$2,50,000",
-      location: "San Francisco",
+      title: "Penthouse Suite",
+      type: "penthouse",
+      price: "Rs1,50,000",
+      location: "Gurgaon",
       image: project_img_5
     },
     {
-      title: "Serenity Suites",
-      price: "$2,50,000",
-      location: "Chicago",
+      title: "Country Farmhouse",
+      type: "farmhouse",
+      price: "Rs1,00,000",
+      location: "Pune",
       image: project_img_6
     },
     
@@ -76,27 +82,27 @@ export const projectsData = [
 
   export const testimonialsData = [
     {
-        name: "Donald Jackman",
-        title: "Marketing Manager",
+        name: "Cristiano Ronaldo",
+        title: "Footballer",
         image: profile_img_1,
-        alt: "Portrait of Donald Jackman",
+        alt: "Portrait of Cristiano Ronaldo",
         rating: 5,
-        text: "From the very first meeting, they understood my vision and helped me find the perfect property. Their attention to detail and commitment to client satisfaction is unmatched."
+        text: "From the very first meeting, they understood my son's vision and helped me find the perfect property for my son. Their attention to detail and commitment to client satisfaction is unmatched."
     },
     {
-        name: "Richard Nelson",
-        title: "UI/UX Designer",
+        name: "Lionel Messi",
+        title: "Footballer",
         image: profile_img_2,
-        alt: "Portrait of Richard Nelson",
+        alt: "Portrait of Lionel Messi",
         rating: 4,
-        text: "From the very first meeting, they understood my vision and helped me find the perfect property. Their attention to detail and commitment to client satisfaction is unmatched."
+        text: "My daughter wanted a flat for her college and they helped us to find a perfect flat. My working experience was good with them."
     },
     {
-        name: "James Washington",
-        title: "Co-Founder",
+        name: "Virat Kohli",
+        title: "King of cricket",
         image: profile_img_3,
-        alt: "Portrait of James Washington",
+        alt: "Portrait of Virat Kohli",
         rating: 5,
-        text: "From the very first meeting, they understood my vision and helped me find the perfect property. Their attention to detail and commitment to client satisfaction is unmatched."
+        text: "I wanted to gift flat to my nephew and she loved it. The entire process was smooth, and working with you was an absolute pleasure. Your professionalism, guidance, and support made everything so much easier."
     }
 ];

@@ -15,11 +15,11 @@ const About = () => {
             <div className='flex flex-col items-center md:items-start mt-10 text-gray-600'>
                 <div className='grid grid-cols-2 gap-6 md:gap-10 w-full 2xl:pr-28'>
                 <div>
-                    <p className='text-4xl font-medium text-gray-800'>10+</p>
-                    <p>Years of Excellence</p>
+                    <p className='text-4xl font-medium text-gray-800'>2</p>
+                    <p>Months of Excellence</p>
                 </div>
                 <div>
-                    <p className='text-4xl font-medium text-gray-800'>12+</p>
+                    <p className='text-4xl font-medium text-gray-800'>4+</p>
                     <p>Projects Completed</p>
                 </div>
                 <div>
@@ -31,9 +31,9 @@ const About = () => {
                     <p>Ongoing Projects</p>
                 </div>
                 </div>
-                <p className='my-10 max-w-lg'>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Illo 
-                   libero vel exercitationem reprehenderit consectetur nulla, tempore
-                   ea, similique tempora, assumenda architecto. Eaque, tempore ea aliquam incidunt temporibus minus quae eum!</p>
+                <p className='my-10 max-w-lg'>At Property-Rental, we are dedicated to simplifying your property rental experience. 
+                  Whether you're looking for a temporary stay or a long-term home, our platform offers a wide range of carefully 
+                  curated properties to suit every need and budget. Our mission is to provide students their dream flat near colleges.</p>
             </div>
         </div>
     </div>
