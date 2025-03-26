@@ -5,6 +5,7 @@ const Projects = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [cardsToShow, setCardsToshow] = useState(1);
   const [selectedType, setSelectedType] = useState(''); // Track selected type
+  const [searchQuery, setSearchQuery] = useState(''); // Track search query
 
   useEffect(() => {
     const updateCardsToShow = () => {
@@ -32,10 +33,18 @@ const Projects = () => {
     setCurrentIndex(0); // Reset to the first project when the type changes
   };
 
-  // Filter projects based on the selected type
-  const filteredProjects = selectedType
-    ? projectsData.filter((project) => project.type === selectedType)
-    : projectsData;
+  const handleSearchChange = (event) => {
+    setSearchQuery(event.target.value.toLowerCase()); // Update search query and convert to lowercase for case-insensitive search
+  };
+
+  // Filter projects based on the selected type and search query
+  const filteredProjects = projectsData.filter((project) => {
+    const matchesType = selectedType ? project.type === selectedType : true;
+    const matchesSearch =
+      project.title.toLowerCase().includes(searchQuery) ||
+      project.location.toLowerCase().includes(searchQuery);
+    return matchesType && matchesSearch;
+  });
 
   return (
     <div className='container mx-auto py-4 pt-20 px-6 md:px-20 lg:px-32 my-20 w-full overflow-hidden' id='Projects'>
@@ -45,6 +54,17 @@ const Projects = () => {
       <p className='text-center text-gray-500 mb-8 max-w-80 mx-auto'>
         Crafting Spaces, Building Legacies - Explore Our Portfolio
       </p>
+
+      {/* Search input */}
+      <div className='mb-6 text-center'>
+        <input
+          type="text"
+          value={searchQuery}
+          onChange={handleSearchChange}
+          placeholder="Search by title or location"
+          className='p-2 border rounded w-full sm:w-1/3 mx-auto'
+        />
+      </div>
 
       {/* Dropdown to filter by property type */}
       <div className='mb-6 text-center'>
@@ -80,21 +100,27 @@ const Projects = () => {
         <div className='flex gap-8 transition-transform duration-500 ease-in-out'
           style={{ transform: `translateX(-${(currentIndex * 100) / cardsToShow}%)` }}
         >
-          {filteredProjects.map((project, index) => (
-            <div key={index} className='relative flex-shrink-0 w-full sm:w-1/4'>
-              <img src={project.image} alt={project.title} className='w-full h-auto mb-14' />
-              <div className='absolute left-0 right-0 bottom-5 flex justify-center'>
-                <div className='inline-block bg-white w-3/4 px-4 py-2 shadow-md'>
-                  <h2 className='text-xl font-semibold text-gray-800'>
-                    {project.title}
-                  </h2>
-                  <p className='text-gray-500 text-sm'>
-                    {project.price} <span className='px-1'>|</span> {project.location}
-                  </p>
+          {filteredProjects.length > 0 ? (
+            filteredProjects.map((project, index) => (
+              <div key={index} className='relative flex-shrink-0 w-full sm:w-1/4'>
+                <img src={project.image} alt={project.title} className='w-full h-auto mb-14' />
+                <div className='absolute left-0 right-0 bottom-5 flex justify-center'>
+                  <div className='inline-block bg-white w-3/4 px-4 py-2 shadow-md'>
+                    <h2 className='text-xl font-semibold text-gray-800'>
+                      {project.title}
+                    </h2>
+                    <p className='text-gray-500 text-sm'>
+                      {project.price} <span className='px-1'>|</span> {project.location}
+                    </p>
+                  </div>
                 </div>
               </div>
+            ))
+          ) : (
+            <div className='w-full text-center text-gray-500'>
+              No properties match your search criteria.
             </div>
-          ))}
+          )}
         </div>
       </div>
     </div>
