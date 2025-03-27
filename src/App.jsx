@@ -21,10 +21,10 @@ const App = () => {
       <Home/>
       <About/>
       <Projects/>
+      <BookingForm/>
       <Testimonials/>
       <Contact/>
       <Footer/>
-      <BookingForm/>
       <BackToTop/>
 
       
