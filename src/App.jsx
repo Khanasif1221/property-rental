@@ -10,7 +10,7 @@ import Footer from './components/Footer'
 import PrivacyPolicy from './components/PrivacyPolicy'
 import TermsConditions from './components/TermsConditions'
 import BookingForm from './components/BookingForms'
-// import PaymentForm from './components/PaymentForm'
+import BackToTop from './components/BackToTop'
 
 
 const App = () => {
@@ -25,7 +25,9 @@ const App = () => {
       <Contact/>
       <Footer/>
       <BookingForm/>
-      {/* <PaymentForm/> */}
+      <BackToTop/>
+
+      
       {/* <PrivacyPolicy/> */}
       {/* <TermsConditions/> */}
       
