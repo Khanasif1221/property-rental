@@ -4,8 +4,10 @@ import { assets, projectsData } from '../assets/assets';
 const Projects = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [cardsToShow, setCardsToshow] = useState(1);
-  const [selectedType, setSelectedType] = useState(''); // Track selected type
-  const [searchQuery, setSearchQuery] = useState(''); // Track search query
+  const [selectedType, setSelectedType] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [minPrice, setMinPrice] = useState(0);
+  const [maxPrice, setMaxPrice] = useState(5000000);
 
   useEffect(() => {
     const updateCardsToShow = () => {
@@ -24,26 +26,35 @@ const Projects = () => {
   const nextProject = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % filteredProjects.length);
   };
+
   const prevProject = () => {
     setCurrentIndex((prevIndex) => (prevIndex === 0 ? filteredProjects.length - 1 : prevIndex - 1));
   };
 
   const handleTypeChange = (event) => {
-    setSelectedType(event.target.value); // Update selected type
-    setCurrentIndex(0); // Reset to the first project when the type changes
+    setSelectedType(event.target.value);
+    setCurrentIndex(0);
   };
 
   const handleSearchChange = (event) => {
-    setSearchQuery(event.target.value.toLowerCase()); // Update search query and convert to lowercase for case-insensitive search
+    setSearchQuery(event.target.value.toLowerCase());
   };
 
-  // Filter projects based on the selected type and search query
+  // Function to parse price by removing "Rs" and commas
+  const parsePrice = (price) => {
+    return parseInt(price.replace('Rs', '').replace(/,/g, '').trim());
+  };
+
+  // Filter projects based on selected type, price range, and search query
   const filteredProjects = projectsData.filter((project) => {
+    const price = parsePrice(project.price);
     const matchesType = selectedType ? project.type === selectedType : true;
     const matchesSearch =
       project.title.toLowerCase().includes(searchQuery) ||
       project.location.toLowerCase().includes(searchQuery);
-    return matchesType && matchesSearch;
+    const matchesPrice = price >= minPrice && price <= maxPrice;
+
+    return matchesType && matchesSearch && matchesPrice;
   });
 
   return (
@@ -85,6 +96,37 @@ const Projects = () => {
         </select>
       </div>
 
+      {/* Dropdown to filter by price range */}
+      <div className="mb-6 text-center">
+        <h3 className="text-lg font-semibold">Filter by Price Range</h3>
+        <div className="flex justify-center items-center mb-2">
+          <select
+            value={minPrice}
+            onChange={(e) => setMinPrice(Number(e.target.value))}
+            className="mx-2 p-2 border rounded"
+          >
+            <option value={0}>Rs 0</option>
+            <option value={100000}>Rs 1,00,000</option>
+            <option value={200000}>Rs 2,00,000</option>
+            <option value={300000}>Rs 3,00,000</option>
+            <option value={400000}>Rs 4,00,000</option>
+            <option value={500000}>Rs 5,00,000</option>
+          </select>
+          <span>to</span>
+          <select
+            value={maxPrice}
+            onChange={(e) => setMaxPrice(Number(e.target.value))}
+            className="mx-2 p-2 border rounded"
+          >
+            <option value={100000}>Rs 1,00,000</option>
+            <option value={200000}>Rs 2,00,000</option>
+            <option value={300000}>Rs 3,00,000</option>
+            <option value={400000}>Rs 4,00,000</option>
+            <option value={500000}>Rs 5,00,000</option>
+          </select>
+        </div>
+      </div>
+
       {/* Slider buttons */}
       <div className='flex justify-end items-center mb-8'>
         <button onClick={prevProject} className='p-3 bg-gray-200 rounded mr-2' aria-label='Previous project'>
@@ -102,7 +144,7 @@ const Projects = () => {
         >
           {filteredProjects.length > 0 ? (
             filteredProjects.map((project, index) => (
-              <div key={index} className='relative flex-shrink-0 w-full sm:w-1/4'>
+              <div key={index} className='relative flex-shrink-0 w-full sm:w-1/4  hover:scale-110  transition-transform duration-300 '>
                 <img src={project.image} alt={project.title} className='w-full h-auto mb-14' />
                 <div className='absolute left-0 right-0 bottom-5 flex justify-center'>
                   <div className='inline-block bg-white w-3/4 px-4 py-2 shadow-md'>

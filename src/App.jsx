@@ -9,6 +9,8 @@ import { ToastContainer } from 'react-toastify'
 import Footer from './components/Footer'
 import PrivacyPolicy from './components/PrivacyPolicy'
 import TermsConditions from './components/TermsConditions'
+import BookingForm from './components/BookingForms'
+// import PaymentForm from './components/PaymentForm'
 
 
 const App = () => {
@@ -22,6 +24,8 @@ const App = () => {
       <Testimonials/>
       <Contact/>
       <Footer/>
+      <BookingForm/>
+      {/* <PaymentForm/> */}
       {/* <PrivacyPolicy/> */}
       {/* <TermsConditions/> */}
       
