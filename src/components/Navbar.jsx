@@ -1,58 +1,198 @@
-import React, { useEffect, useState } from 'react'
-import {assets} from '../assets/assets'
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const Navbar = () => {
-  const [showMobileMenu, setShowMobileMenu] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
+  const token = localStorage.getItem('token');
 
-  useEffect(()=>{
-    if(showMobileMenu){
-      document.body.style.overflow = 'hidden'
-    }else {
-      document.body.style.overflow = 'auto'
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    toast.success('Logged out successfully');
+    navigate('/');
+  };
+
+  const handleBookNow = () => {
+    if (!token) {
+      toast.error('Please login to make a booking');
+      navigate('/login');
+      return;
     }
-    return () => {
-      document.body.style.overflow = 'auto'
-    };
-  },[showMobileMenu])
+    navigate('/booking');
+  };
+
   return (
-    <div className='absolute top-0 left-0 w-full z-10'>
-        <div className='container mx-auto flex justify-between 
-        items-center py-4 px-6 md:px-20 lg:px-32 bg-transparent'>
-            <img src= {assets.logo} alt="" />
-            <ul className='hidden md:flex gap-7 text-white'>
-                <a href="#Home" className='cursor-pointer 
-                hover:text-gray-400'>Home</a>
-                <a href="#About" className='cursor-pointer 
-                hover:text-gray-400'>About</a>
-                <a href="#Projects" className='cursor-pointer 
-                hover:text-gray-400'>Projects</a>
-                <a href="#Feedback" className='cursor-pointer 
-                hover:text-gray-400'>Feedback</a>
-            </ul>
-            <button className='hidden md:block bg-white px-8 py-2 rounded-full'>Sign up</button>
-            <img onClick={()=> setShowMobileMenu(true)} src={assets.menu_icon} className= 'md:hidden w-7 cursor-pointer'alt="" />
-        </div>
-
-        {/* ------mobile menu------ */}
-        <div className={`md:hidden ${showMobileMenu ? 'fixed w-full': 'h-0 w-0'}  right-0 top-0 bottom-0 overflow-hidden bg-white transition-all`}>
-          <div className='flex justify-end p-6 cursor-pointer'>
-            <img onClick={() => setShowMobileMenu(false)} src={assets.cross_icon} className='w-6' alt="" />
+    <nav className="bg-white shadow-lg fixed w-full z-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-4">
+        <div className="flex justify-between h-16">
+        <div className="flex-shrink-0 flex items-center">
+              <Link to="/" className="text-xl font-bold text-gray-800">
+                Property Rental
+              </Link>
+            </div>
+          <div className="flex justify-between items-center">
+            
+            <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
+              <Link to="/" className="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md">
+                Home
+              </Link>
+              <Link to="/projects" className="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md">
+                Property
+              </Link>
+              <Link to="/about" className="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md">
+                About
+              </Link>
+              <Link to="/contact" className="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md">
+                Contact
+              </Link>
+            </div>
           </div>
-          <ul className='flex flex-col items-center gap-2 mt-5 px-5 text-lg font-medium'>
-            <a onClick={() => setShowMobileMenu(false)} href="#Header" className='px-4 py2 rounded-full
-             inline-block'>Home</a>
-             <a onClick={() => setShowMobileMenu(false)} href="#About" className='px-4 py2 rounded-full
-             inline-block'>About</a>
-             <a onClick={() => setShowMobileMenu(false)} href="#Projects" className='px-4 py2 rounded-full
-             inline-block'>Projects</a>
-             <a onClick={() => setShowMobileMenu(false)} href="#Testimonials" className='px-4 py2 rounded-full
-             inline-block'>Testimonials</a>
-          </ul>
 
+          <div className="hidden sm:ml-6 sm:flex sm:items-center sm:space-x-4">
+            <button
+              onClick={handleBookNow}
+              className="bg-blue-600 text-white cursor-pointer px-4 py-2 rounded-md hover:bg-blue-700 transition-colors"
+            >
+              Book Now
+            </button>
+            {token ? (
+              <>
+                <Link
+                  to="/dashboard"
+                  className="text-gray-600  border-2 border-gray-500 text-yellow-600  hover:bg-gray-200 px-3 py-2 rounded-md"
+                >
+                  Dashboard
+                </Link>
+                <button
+                  onClick={handleLogout}
+                  className="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md hover:text-red-600 cursor-pointer"
+                >
+                  Logout
+                </button>
+              </>
+            ) : (
+              <>
+                <Link
+                  to="/login"
+                  className="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md"
+                >
+                  Login
+                </Link>
+                <Link
+                  to="/register-user"
+                  className="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md"
+                >
+                  Register
+                </Link>
+              </>
+            )}
+          </div>
+
+          {/* Mobile menu button */}
+          <div className="flex items-center sm:hidden">
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
+            >
+              <span className="sr-only">Open main menu</span>
+              {!isOpen ? (
+                <svg className="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              ) : (
+                <svg className="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              )}
+            </button>
+          </div>
         </div>
-      
-    </div>
-  )
-}
+      </div>
 
-export default Navbar
+      {/* Mobile menu */}
+      {isOpen && (
+        <div className="sm:hidden">
+          <div className="pt-2 pb-3 space-y-1">
+            <Link
+              to="/"
+              className="block px-3 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+              onClick={() => setIsOpen(false)}
+            >
+              Home
+            </Link>
+            <Link
+              to="/projects"
+              className="block px-3 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+              onClick={() => setIsOpen(false)}
+            >
+              Projects
+            </Link>
+            <Link
+              to="/about"
+              className="block px-3 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+              onClick={() => setIsOpen(false)}
+            >
+              About
+            </Link>
+            <Link
+              to="/contact"
+              className="block px-3 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+              onClick={() => setIsOpen(false)}
+            >
+              Contact
+            </Link>
+            <button
+              onClick={() => {
+                handleBookNow();
+                setIsOpen(false);
+              }}
+              className="w-full text-left px-3 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+            >
+              Book Now
+            </button>
+            {token ? (
+              <>
+                <Link
+                  to="/dashboard"
+                  className="block px-3 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Dashboard
+                </Link>
+                <button
+                  onClick={() => {
+                    handleLogout();
+                    setIsOpen(false);
+                  }}
+                  className="w-full text-left px-3 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+                >
+                  Logout
+                </button>
+              </>
+            ) : (
+              <>
+                <Link
+                  to="/login"
+                  className="block px-3 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Login
+                </Link>
+                <Link
+                  to="/register-user"
+                  className="block px-3 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Register
+                </Link>
+              </>
+            )}
+          </div>
+        </div>
+      )}
+    </nav>
+  );
+};
+
+export default Navbar;

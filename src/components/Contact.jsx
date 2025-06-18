@@ -1,6 +1,6 @@
 import React from 'react'
 import { toast } from 'react-toastify';
-
+import Navbar from '../components/Navbar'
 const Contact = () => {
 
     const [result, setResult] = React.useState("");
@@ -32,6 +32,8 @@ const Contact = () => {
   
 
   return (
+    <>
+    <Navbar/> 
     <div className='text-center p-6 py-20 lg:px-32 w-full
     overflow-hidden' id='Contact'>
         <h1 className='text-2xl sm:text-4xl font-bold mb-2
@@ -65,6 +67,7 @@ const Contact = () => {
 </form>
   
     </div>
+    </>
   )
 }
 

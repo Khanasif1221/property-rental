@@ -1,9 +1,12 @@
 import React from 'react'
 import { assets, testimonialsData } from '../assets/assets'
+import Navbar from './Navbar'
 
 const Testimonials = () => {
   return (
-    <div className='container mx-auto py-10 lg:px-32 w-full 
+    <>
+    <Navbar/>
+    <div className='container mx-auto py-10 mt-14 lg:px-32 w-full 
     overflow-hidden' id='Feedback'>
       <h1 className='text-2xl sm:text-4xl font-bold mb-2
       text-center'>Customer <span className='underline 
@@ -28,6 +31,7 @@ const Testimonials = () => {
 </div>
 
     </div>
+    </>
   )
 }
 

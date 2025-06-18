@@ -1,9 +1,13 @@
 import React from 'react'
 import { assets } from '../assets/assets'
+import Navbar from './Navbar'
 
 const About = () => {
+
   return (
-    <div className='flex flex-col items-center justify-center
+    <>
+    <Navbar/>
+    <div className='flex flex-col items-center mt-12 justify-center
     container mx-auto p-14 md:px-20 lg:px-32 w-full
     overflow-hidden' id='About'>
       <h1 className='text-2xl sm:text-4xl font-bold mb-2'>About <span 
@@ -37,6 +41,7 @@ const About = () => {
             </div>
         </div>
     </div>
+    </>
   )
 }
 
